@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Website</title>
+    <title>Alpha Flexer AXA</title>
 
     <style>
         * {
@@ -12,6 +12,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -20,7 +21,6 @@
             min-height: 100vh;
         }
 
-        /* NAVBAR */
         nav {
             height: 70px;
             display: flex;
@@ -29,6 +29,9 @@
             padding: 0 7%;
             border-bottom: 1px solid #202633;
             background: #0b0f18;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
@@ -50,11 +53,10 @@
             color: white;
         }
 
-        /* HERO */
         .hero {
             max-width: 1000px;
             margin: auto;
-            padding: 120px 20px 80px;
+            padding: 120px 20px 100px;
             text-align: center;
         }
 
@@ -97,6 +99,7 @@
             text-decoration: none;
             margin: 5px;
             font-weight: bold;
+            transition: 0.2s;
         }
 
         .primary {
@@ -110,23 +113,27 @@
         }
 
         .btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
 
-        /* FEATURES */
-        .features {
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        .features,
+        .projects {
             max-width: 1100px;
             margin: auto;
-            padding: 50px 20px 100px;
+            padding: 80px 20px;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 45px;
         }
 
         .section-title h2 {
-            font-size: 35px;
+            font-size: 38px;
             margin-bottom: 10px;
         }
 
@@ -154,7 +161,7 @@
         }
 
         .icon {
-            font-size: 30px;
+            font-size: 32px;
             margin-bottom: 20px;
         }
 
@@ -167,7 +174,27 @@
             line-height: 1.6;
         }
 
-        /* FOOTER */
+        .project-card {
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-tag {
+            display: inline-block;
+            color: #8f88ff;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .project-btn {
+            display: inline-block;
+            margin-top: 20px;
+            color: white;
+            text-decoration: none;
+        }
+
         footer {
             border-top: 1px solid #202633;
             text-align: center;
@@ -175,7 +202,6 @@
             color: #666;
         }
 
-        /* MOBILE */
         @media (max-width: 700px) {
             nav {
                 padding: 0 20px;
@@ -198,21 +224,26 @@
 
 <body>
 
+    <!-- NAVBAR -->
     <nav>
-        <div class="logo">My<span>Website</span></div>
+        <div class="logo">
+            Alpha <span>Flexer AXA</span>
+        </div>
 
         <div class="links">
             <a href="#">Home</a>
             <a href="#features">Features</a>
-            <a href="#">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#about">About</a>
         </div>
     </nav>
 
 
+    <!-- HOME -->
     <section class="hero">
 
         <div class="badge">
-            🚀 Welcome to my website
+            🚀 Welcome to Alpha Flexer AXA
         </div>
 
         <h1>
@@ -221,28 +252,29 @@
         </h1>
 
         <p>
-            This is my personal project website.
-            New features, tools and experiments will be added here over time.
+            A personal project hub for games, AI experiments,
+            tools and future projects.
         </p>
 
         <div class="buttons">
-            <a href="#features" class="btn primary">
-                Get Started
+            <a href="#projects" class="btn primary">
+                View Projects
             </a>
 
-            <a href="#" class="btn secondary">
-                Learn More
+            <a href="#features" class="btn secondary">
+                Explore
             </a>
         </div>
 
     </section>
 
 
+    <!-- FEATURES -->
     <section class="features" id="features">
 
         <div class="section-title">
-            <h2>What's Coming</h2>
-            <p>More features will be added soon.</p>
+            <h2>Features</h2>
+            <p>Things that will be added to Alpha Flexer AXA.</p>
         </div>
 
         <div class="cards">
@@ -259,7 +291,7 @@
                 <div class="icon">🎮</div>
                 <h3>Game Development</h3>
                 <p>
-                    Projects, experiments and game-development work.
+                    Unity games, prototypes and development projects.
                 </p>
             </div>
 
@@ -267,7 +299,7 @@
                 <div class="icon">⚡</div>
                 <h3>New Features</h3>
                 <p>
-                    New ideas and useful features will keep coming.
+                    New ideas and useful features will be added regularly.
                 </p>
             </div>
 
@@ -276,8 +308,81 @@
     </section>
 
 
+    <!-- PROJECTS -->
+    <section class="projects" id="projects">
+
+        <div class="section-title">
+            <h2>My Projects</h2>
+            <p>Projects that I'm working on.</p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card project-card">
+                <div>
+                    <span class="project-tag">GAME DEVELOPMENT</span>
+                    <h3>My First Game</h3>
+                    <p>
+                        A game project currently in development.
+                    </p>
+                </div>
+
+                <a href="#" class="project-btn">
+                    Coming Soon →
+                </a>
+            </div>
+
+
+            <div class="card project-card">
+                <div>
+                    <span class="project-tag">AI</span>
+                    <h3>AI Project</h3>
+                    <p>
+                        An AI-powered project that will be added later.
+                    </p>
+                </div>
+
+                <a href="#" class="project-btn">
+                    Coming Soon →
+                </a>
+            </div>
+
+
+            <div class="card project-card">
+                <div>
+                    <span class="project-tag">TOOLS</span>
+                    <h3>Future Tool</h3>
+                    <p>
+                        A useful tool or experiment coming soon.
+                    </p>
+                </div>
+
+                <a href="#" class="project-btn">
+                    Coming Soon →
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section class="features" id="about">
+
+        <div class="section-title">
+            <h2>About</h2>
+            <p>
+                Alpha Flexer AXA is a growing personal project space.
+                New games, tools and AI projects will be added over time.
+            </p>
+        </div>
+
+    </section>
+
+
     <footer>
-        © 2026 MyWebsite. All rights reserved.
+        © 2026 Alpha Flexer AXA. All rights reserved.
     </footer>
 
 </body>
