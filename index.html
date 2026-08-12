@@ -1,10 +1,284 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>My Website</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #080b12;
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+        nav {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            border-bottom: 1px solid #202633;
+            background: #0b0f18;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #6c63ff;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* HERO */
+        .hero {
+            max-width: 1000px;
+            margin: auto;
+            padding: 120px 20px 80px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 1px solid #303747;
+            border-radius: 30px;
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(45px, 8vw, 80px);
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: #6c63ff;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: #9ca3af;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .buttons {
+            margin-top: 35px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .primary {
+            background: #6c63ff;
+            color: white;
+        }
+
+        .secondary {
+            border: 1px solid #303747;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* FEATURES */
+        .features {
+            max-width: 1100px;
+            margin: auto;
+            padding: 50px 20px 100px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #888;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: #0e131d;
+            border: 1px solid #202633;
+            padding: 30px;
+            border-radius: 15px;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #6c63ff;
+        }
+
+        .icon {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #8d96a6;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid #202633;
+            text-align: center;
+            padding: 30px;
+            color: #666;
+        }
+
+        /* MOBILE */
+        @media (max-width: 700px) {
+            nav {
+                padding: 0 20px;
+            }
+
+            nav .links {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 80px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Hello World!</h1>
-    <p>Welcome to my website.</p>
+
+    <nav>
+        <div class="logo">My<span>Website</span></div>
+
+        <div class="links">
+            <a href="#">Home</a>
+            <a href="#features">Features</a>
+            <a href="#">About</a>
+        </div>
+    </nav>
+
+
+    <section class="hero">
+
+        <div class="badge">
+            🚀 Welcome to my website
+        </div>
+
+        <h1>
+            Build Something<br>
+            <span>Awesome.</span>
+        </h1>
+
+        <p>
+            This is my personal project website.
+            New features, tools and experiments will be added here over time.
+        </p>
+
+        <div class="buttons">
+            <a href="#features" class="btn primary">
+                Get Started
+            </a>
+
+            <a href="#" class="btn secondary">
+                Learn More
+            </a>
+        </div>
+
+    </section>
+
+
+    <section class="features" id="features">
+
+        <div class="section-title">
+            <h2>What's Coming</h2>
+            <p>More features will be added soon.</p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">🤖</div>
+                <h3>AI Tools</h3>
+                <p>
+                    AI-powered tools and experiments will be added here.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🎮</div>
+                <h3>Game Development</h3>
+                <p>
+                    Projects, experiments and game-development work.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">⚡</div>
+                <h3>New Features</h3>
+                <p>
+                    New ideas and useful features will keep coming.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        © 2026 MyWebsite. All rights reserved.
+    </footer>
+
 </body>
 </html>
