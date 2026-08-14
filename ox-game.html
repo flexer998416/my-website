@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Fun Time — OX Game | Alpha Flexer AXA</title>
+
+  <style>
+    :root {
+      --bg: #07090d;
+      --surface: #0e131b;
+      --border: rgba(255,255,255,.09);
+      --text: #f5f7fb;
+      --muted: #8c94a4;
+      --accent: #8b7cff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Inter, system-ui, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(139,124,255,.13), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(7,9,13,.8);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      max-width: 1120px;
+      height: 72px;
+      margin: auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .back {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .back:hover {
+      color: white;
+    }
+
+    main {
+      width: min(700px, calc(100% - 30px));
+      margin: auto;
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .label {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin-top: 8px;
+      font-size: clamp(38px, 7vw, 58px);
+      letter-spacing: -2px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .game {
+      margin: 40px auto 25px;
+      width: min(360px, 90vw);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .cell {
+      aspect-ratio: 1;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface);
+      color: white;
+      font-size: clamp(42px, 12vw, 65px);
+      font-weight: 800;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .cell:hover {
+      border-color: rgba(139,124,255,.55);
+      transform: translateY(-2px);
+    }
+
+    .cell:disabled {
+      cursor: default;
+    }
+
+    .status {
+      min-height: 28px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .restart {
+      margin-top: 20px;
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--accent);
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .restart:hover {
+      transform: translateY(-2px);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 25px;
+      text-align: center;
+      color: #626a78;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+
+    <a href="index.html" class="brand">
+      Alpha <span>Flexer AXA</span>
+    </a>
+
+    <a href="index.html" class="back">
+      ← Back to website
+    </a>
+
+  </div>
+</header>
+
+
+<main>
+
+  <div class="label">Fun Time</div>
+
+  <h1>OX Game</h1>
+
+  <p class="subtitle">
+    A quick game of Tic-Tac-Toe. You are X.
+  </p>
+
+  <div class="game" id="game">
+
+    <button class="cell"></button>
+    <button class="cell"></button>
+    <button class="cell"></button>
+
+    <button class="cell"></button>
+    <button class="cell"></button>
+    <button class="cell"></button>
+
+    <button class="cell"></button>
+    <button class="cell"></button>
+    <button class="cell"></button>
+
+  </div>
+
+  <div class="status" id="status">
+    Your turn — X
+  </div>
+
+  <button class="restart" id="restart">
+    New Game
+  </button>
+
+</main>
+
+
+<footer>
+  © 2026 Alpha Flexer AXA
+</footer>
+
+
+<script>
+  const cells = [...document.querySelectorAll(".cell")];
+  const statusText = document.getElementById("status");
+  const restartButton = document.getElementById("restart");
+
+  let board = Array(9).fill("");
+  let gameOver = false;
+
+  const winningLines = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
+  ];
+
+  function winner() {
+    for (const [a,b,c] of winningLines) {
+      if (
+        board[a] &&
+        board[a] === board[b] &&
+        board[a] === board[c]
+      ) {
+        return board[a];
+      }
+    }
+
+    return board.includes("") ? null : "draw";
+  }
+
+  function playerMove(index) {
+    if (gameOver || board[index]) return;
+
+    board[index] = "X";
+    render();
+
+    const result = winner();
+
+    if (result) {
+      finish(result);
+      return;
+    }
+
+    statusText.textContent = "Computer is thinking...";
+
+    setTimeout(computerMove, 350);
+  }
+
+  function computerMove() {
+    if (gameOver) return;
+
+    const available = board
+      .map((value, index) => value === "" ? index : null)
+      .filter(index => index !== null);
+
+    if (!available.length) return;
+
+    /*
+      Simple AI:
+      1. Try to win.
+      2. Block the player.
+      3. Take the center.
+      4. Pick a random available cell.
+    */
+
+    let move = findWinningMove("O");
+
+    if (move === null) {
+      move = findWinningMove("X");
+    }
+
+    if (move === null && board[4] === "") {
+      move = 4;
+    }
+
+    if (move === null) {
+      move = available[Math.floor(Math.random() * available.length)];
+    }
+
+    board[move] = "O";
+
+    render();
+
+    const result = winner();
+
+    if (result) {
+      finish(result);
+    } else {
+      statusText.textContent = "Your turn — X";
+    }
+  }
+
+  function findWinningMove(symbol) {
+    for (const line of winningLines) {
+      const values = line.map(index => board[index]);
+
+      const symbolCount =
+        values.filter(value => value === symbol).length;
+
+      const emptyIndex = line.find(index => board[index] === "");
+
+      if (symbolCount === 2 && emptyIndex !== undefined) {
+        return emptyIndex;
+      }
+    }
+
+    return null;
+  }
+
+  function finish(result) {
+    gameOver = true;
+
+    if (result === "X") {
+      statusText.textContent = "You won! 🎉";
+    } else if (result === "O") {
+      statusText.textContent = "Computer won!";
+    } else {
+      statusText.textContent = "It's a draw!";
+    }
+  }
+
+  function render() {
+    cells.forEach((cell, index) => {
+      cell.textContent = board[index];
+      cell.disabled = Boolean(board[index]) || gameOver;
+    });
+  }
+
+  function resetGame() {
+    board = Array(9).fill("");
+    gameOver = false;
+    statusText.textContent = "Your turn — X";
+    render();
+  }
+
+  cells.forEach((cell, index) => {
+    cell.addEventListener("click", () => {
+      playerMove(index);
+    });
+  });
+
+  restartButton.addEventListener("click", resetGame);
+
+  render();
+</script>
+
+</body>
+</html>
